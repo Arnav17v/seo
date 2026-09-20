@@ -1,0 +1,31 @@
+{
+  "name": "project-rankup-landing",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . && tsc --noEmit",
+    "test:e2e": "playwright test tests/landing.spec.ts",
+    "test:motion": "playwright test tests/landing.motion.spec.ts",
+    "test:visual": "playwright test tests/landing.visual.spec.ts"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "gsap": "^3.13.0",
+    "lucide-react": "latest"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "@axe-core/playwright": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest"
+  }
+}
