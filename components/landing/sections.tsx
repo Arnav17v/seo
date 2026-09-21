@@ -10,7 +10,6 @@ import {
   Plus,
   RefreshCw,
   Search,
-  ShieldCheck,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
@@ -60,6 +59,21 @@ const performancePages = [
   },
 ];
 
+const workloadSignals = [
+  "Keyword research",
+  "Competitor gaps",
+  "Content briefs",
+  "Search intent",
+  "Internal links",
+  "Rank tracking",
+  "Traffic decay",
+  "Topic clusters",
+  "AI citations",
+  "Refresh queue",
+  "Lead capture",
+  "Performance audits",
+];
+
 export function WorkflowContext() {
   return (
     <section
@@ -67,11 +81,21 @@ export function WorkflowContext() {
       data-motion-section="overload"
       aria-labelledby="overload-title"
     >
+      <div className="workload-word-field" aria-hidden="true">
+        {workloadSignals.map((signal, index) => (
+          <span
+            className={`workload-word workload-word-${index}`}
+            key={signal}
+          >
+            {signal}
+          </span>
+        ))}
+      </div>
       <div className="wrap overload-inner">
         <div className="overload-copy">
           <span>GROWING SHOULDN&apos;T MEAN DOING EVERYTHING YOURSELF</span>
           <h2 id="overload-title">
-            Growing your traffic shouldn't become another full-time job.
+            Growing your traffic shouldn&apos;t become another full-time job.
           </h2>
           <p>
             Keyword research, competitor analysis, content briefs, writing, internal linking, rank tracking, and performance audits—all competing for your time. Rankup connects the entire workflow so you can focus on growth, not the busywork.
@@ -139,12 +163,12 @@ export function MeasureImprove() {
     >
       <div className="wrap performance-inner">
         <div className="performance-copy">
-          <span>SEE WHAT'S WORKING</span>
+          <span>SEE WHAT&apos;S WORKING</span>
           <h2 id="performance-title">
             See how your content performs after you publish.
           </h2>
           <p>
-            Rankup tracks your rankings, clicks, impressions, and content performance so you can see what's growing and what needs attention.
+            Rankup tracks your rankings, clicks, impressions, and content performance so you can see what&apos;s growing and what needs attention.
           </p>
         </div>
 

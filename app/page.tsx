@@ -34,11 +34,6 @@ export default function Page() {
               <br />
               It handles the workflow.
             </h2>
-            <p>
-              Watch a selected opportunity move from discovery through
-              prioritization, planning, content preparation, measurement, and
-              improvement.
-            </p>
           </div>
           <GrowthLoop />
         </section>

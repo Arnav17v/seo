@@ -9,7 +9,7 @@ export function LandingEffects() {
     ).matches;
     const numberFormatter = new Intl.NumberFormat("en-US");
 
-    const formatScrollNumber = (value: number, format: string | null) => {
+    const formatNumber = (value: number, format: string | null) => {
       if (format === "compact") {
         return `${(value / 1000).toFixed(value >= 10000 ? 1 : 0)}K`;
       }
@@ -29,35 +29,60 @@ export function LandingEffects() {
       format: element.dataset.countFormat ?? null,
       target: Number(element.dataset.countTo ?? "0"),
     }));
+    countTargets.forEach(({ element, format }) => {
+      element.textContent = formatNumber(0, format);
+    });
 
-    let dashboardFrame = 0;
-    const updateDashboardProgress = () => {
-      if (!dashboard) return;
+    let countFrame = 0;
+    let countStarted = false;
+    const renderCounts = (progress: number) => {
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
 
-      cancelAnimationFrame(dashboardFrame);
-      dashboardFrame = requestAnimationFrame(() => {
-        const rect = dashboard.getBoundingClientRect();
-        const viewport = window.innerHeight || document.documentElement.clientHeight;
-        const rawProgress = 1 - rect.top / (viewport * 0.82);
-        const progress = reducedMotion
-          ? 1
-          : Math.min(1, Math.max(0, rawProgress));
-        const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-        dashboard.style.setProperty(
-          "--hero-progress",
-          easedProgress.toFixed(3),
-        );
-
-        countTargets.forEach(({ element, format, target }) => {
-          element.textContent = formatScrollNumber(target * easedProgress, format);
-        });
+      dashboard?.style.setProperty("--hero-progress", easedProgress.toFixed(3));
+      countTargets.forEach(({ element, format, target }) => {
+        element.textContent = formatNumber(target * easedProgress, format);
       });
     };
+    const startCountAnimation = () => {
+      if (countStarted) return;
+      countStarted = true;
 
-    updateDashboardProgress();
-    window.addEventListener("scroll", updateDashboardProgress, { passive: true });
-    window.addEventListener("resize", updateDashboardProgress);
+      if (reducedMotion) {
+        renderCounts(1);
+        return;
+      }
+
+      const duration = 900;
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min(1, (now - start) / duration);
+        renderCounts(progress);
+
+        if (progress < 1) {
+          countFrame = requestAnimationFrame(tick);
+        }
+      };
+
+      countFrame = requestAnimationFrame(tick);
+    };
+    const countObserver =
+      dashboard && countTargets.length > 0
+        ? new IntersectionObserver(
+            (entries) => {
+              if (entries.some((entry) => entry.isIntersecting)) {
+                startCountAnimation();
+                countObserver?.disconnect();
+              }
+            },
+            { rootMargin: "0px 0px -18%", threshold: 0.35 },
+          )
+        : null;
+
+    if (countObserver && dashboard) {
+      countObserver.observe(dashboard);
+    } else {
+      startCountAnimation();
+    }
 
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>("[data-motion-section]"),
@@ -76,7 +101,7 @@ export function LandingEffects() {
 
     const pointerTargets = Array.from(
       document.querySelectorAll<HTMLElement>(
-        ".hero-product-scene, .tactile-card",
+        ".tactile-card, .overload-section, .final-echo-section",
       ),
     );
     const cleanups = pointerTargets.map((target) => {
@@ -106,9 +131,8 @@ export function LandingEffects() {
     });
 
     return () => {
-      cancelAnimationFrame(dashboardFrame);
-      window.removeEventListener("scroll", updateDashboardProgress);
-      window.removeEventListener("resize", updateDashboardProgress);
+      cancelAnimationFrame(countFrame);
+      countObserver?.disconnect();
       observer.disconnect();
       cleanups.forEach((cleanup) => cleanup());
     };
