@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/landing/site-header";
 import { Hero } from "@/components/landing/hero";
 import {
   WorkflowContext,
+  HowItWorks,
   ProductStory,
   MeasureImprove,
   AgentMode,
@@ -20,6 +21,7 @@ export default function Page() {
           <Hero />
         </section>
         <WorkflowContext />
+        <HowItWorks />
         <ProductStory />
         <MeasureImprove />
         <AgentMode />

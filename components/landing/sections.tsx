@@ -1,11 +1,18 @@
 import Image from "next/image";
+import { MorphingText } from "@/components/ui/morphing-text";
+import { FaLinkedinIn } from "react-icons/fa6";
+import { SiShopify, SiStrapi, SiWordpress } from "react-icons/si";
 import {
   ArrowRight,
   ArrowUpRight,
+  BarChart2,
   BarChart3,
+  BookOpen,
   Check,
   Compass,
+  FileChartColumn,
   FileText,
+  Image as ImageIcon,
   Layers,
   Link2,
   PenLine,
@@ -14,54 +21,43 @@ import {
   Search,
   ShieldCheck,
   Sparkles,
-  TrendingDown,
   TrendingUp,
 } from "lucide-react";
 import { assets, links, testimonials, faqs } from "@/content/landing";
 import { AnimatedList } from "@/components/ui/animated-list";
 
+const texts = [
+  "Google",
+  "AI"
+]
 const contentFormats = [
   {
     name: "Blog",
     title: "Answer what your customers are searching for and bring them to your business.",
-    lines: ["Audience", "Intent", "Internal links", "Review notes"],
+    icon: FileText,
   },
   {
     name: "Ebook",
     title: "Turn interested visitors into leads with something worth downloading.",
-    lines: ["Chapters", "FAQ", "Proof points", "Download structure"],
+    icon: BookOpen,
   },
   {
     name: "Whitepaper",
     title: "Build authority with the research and expertise your buyers trust.",
-    lines: ["Summary", "Method", "Findings", "Recommendations"],
+    icon: FileChartColumn,
   },
   {
     name: "LinkedIn",
     title: "Reach potential customers where they already discover ideas and businesses.",
-    lines: ["Hook", "Narrative", "Carousel beats", "Founder voice"],
+    icon: Link2,
   },
 ];
 
-const performancePages = [
-  {
-    name: "Workspace planning guide",
-    status: "climbing",
-    metric: "+",
-    icon: TrendingUp,
-  },
-  {
-    name: "Hybrid office checklist",
-    status: "stagnating",
-    metric: "~",
-    icon: BarChart3,
-  },
-  {
-    name: "Old layout article",
-    status: "falling",
-    metric: "-",
-    icon: TrendingDown,
-  },
+const publishingPlatforms = [
+  { name: "LinkedIn", icon: FaLinkedinIn, className: "platform-linkedin" },
+  { name: "WordPress", icon: SiWordpress, className: "platform-wordpress" },
+  { name: "Shopify", icon: SiShopify, className: "platform-shopify" },
+  { name: "Strapi", icon: SiStrapi, className: "platform-strapi" },
 ];
 
 const workloadItems = [
@@ -190,6 +186,13 @@ export function WorkflowContext() {
           >
             Growing your traffic shouldn&apos;t become another full-time job.
           </h2>
+          <div className="seo-sticky-note" aria-label="SEO work reminder">
+            <span>On your desk today</span>
+            <p>
+              Find keywords. Brief writers. Check rankings. Add links. Update
+              old pages. Repeat before anything actually grows.
+            </p>
+          </div>
         </div>
 
         <div className="relative flex w-full max-w-[520px] flex-col overflow-hidden h-[480px] [mask-image:linear-gradient(to_bottom,black_65%,transparent_100%)] justify-self-end">
@@ -205,6 +208,297 @@ export function WorkflowContext() {
   );
 }
 
+export function HowItWorks() {
+  return (
+    <section
+      className="section-space relative overflow-hidden bg-white py-24 sm:py-32"
+      id="how-it-works"
+      aria-labelledby="how-it-works-title"
+    >
+      <div className="wrap mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-neutral-400 block mb-3">
+            HOW IT WORKS
+          </span>
+          <h2
+            id="how-it-works-title"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-950 leading-[1.12]"
+          >
+            You don&apos;t have to manage the process. RankUp does.
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+            From finding the opportunity to creating the content and growing
+            your traffic, RankUp handles the entire workflow.
+          </p>
+        </div>
+
+        {/* 3 Bento Cards Grid */}
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+          {/* Card 1: DISCOVER */}
+          <article className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-blue-100/90 bg-gradient-to-b from-[#eef5ff] via-[#f7faff] to-[#ffffff] p-7 sm:p-8 shadow-[0_4px_24px_-4px_rgba(59,130,246,0.06)] min-h-[540px]">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="flex items-center justify-center rounded-full bg-blue-100 px-2.5 py-0.5 font-mono text-xs font-bold text-blue-700">
+                  01
+                </span>
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-800">
+                  DISCOVER
+                </span>
+              </div>
+              <h3 className="mt-4 text-2xl sm:text-[26px] font-bold tracking-tight text-neutral-950 leading-snug">
+                We find what&apos;s worth creating.
+              </h3>
+              <p className="mt-2.5 text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                RankUp scans your niche, competitors and existing content to
+                surface high-potential opportunities &mdash; before you have to
+                look for them.
+              </p>
+            </div>
+
+            {/* Illustration 1 */}
+            <div className="relative mt-8 flex flex-col items-center justify-end pt-4" aria-hidden="true">
+              {/* Floating search bar */}
+              <div className="relative z-10 flex w-full items-center justify-between gap-2 rounded-full border border-neutral-200/90 bg-white px-4 py-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.05)]">
+                <div className="flex items-center gap-2.5 overflow-hidden">
+                  <Search className="size-4 text-neutral-400 shrink-0" />
+                  <span className="text-xs sm:text-[13px] font-medium text-neutral-800 truncate">
+                    hybrid work best practices
+                  </span>
+                </div>
+                <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 text-white shadow-xs">
+                  <Sparkles className="size-3.5 fill-white" />
+                </div>
+              </div>
+
+              {/* Dotted animated connector lines SVG */}
+              <div className="relative w-full h-12 my-[-2px] overflow-visible pointer-events-none">
+                <svg className="w-full h-full overflow-visible" viewBox="0 0 260 48" fill="none">
+                  {/* Outer Left Flow */}
+                  <path
+                    d="M 40,48 C 50,16 130,16 130,0"
+                    stroke="#93c5fd"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 4"
+                    className="animate-flow-search opacity-75"
+                  />
+                  {/* Inner Left Flow */}
+                  <path
+                    d="M 85,48 C 85,20 130,20 130,0"
+                    stroke="#60a5fa"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 4"
+                    className="animate-flow-search"
+                  />
+                  {/* Inner Right Flow */}
+                  <path
+                    d="M 175,48 C 175,20 130,20 130,0"
+                    stroke="#60a5fa"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 4"
+                    className="animate-flow-search"
+                  />
+                  {/* Outer Right Flow */}
+                  <path
+                    d="M 220,48 C 210,16 130,16 130,0"
+                    stroke="#93c5fd"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 4"
+                    className="animate-flow-search opacity-75"
+                  />
+                </svg>
+              </div>
+
+              {/* 4 Intent Chips Grid (2x2) */}
+              <div className="grid grid-cols-2 gap-2.5 w-full relative z-10">
+                <div className="flex items-center gap-2 rounded-xl border border-neutral-200/90 bg-white p-2.5 shadow-xs">
+                  <div className="flex size-5 items-center justify-center rounded bg-emerald-50 text-emerald-600">
+                    <BarChart2 className="size-3.5" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-neutral-800">Search volume</span>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-xl border border-neutral-200/90 bg-white p-2.5 shadow-xs">
+                  <div className="flex size-5 items-center justify-center rounded bg-amber-50 text-amber-600">
+                    <BarChart2 className="size-3.5" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-neutral-800">Low competition</span>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-xl border border-neutral-200/90 bg-white p-2.5 shadow-xs">
+                  <div className="flex size-5 items-center justify-center rounded bg-purple-50 text-purple-600">
+                    <Sparkles className="size-3.5" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-neutral-800">Competitor gap</span>
+                </div>
+
+                <div className="flex items-center gap-2 rounded-xl border border-neutral-200/90 bg-white p-2.5 shadow-xs">
+                  <div className="flex size-5 items-center justify-center rounded bg-rose-50 text-rose-600">
+                    <Compass className="size-3.5" />
+                  </div>
+                  <span className="text-[11px] font-semibold text-neutral-800">High intent</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* Card 2: CREATE */}
+          <article className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-purple-100/90 bg-gradient-to-b from-[#f7f3ff] via-[#faf8ff] to-[#ffffff] p-7 sm:p-8 shadow-[0_4px_24px_-4px_rgba(168,85,247,0.06)] min-h-[540px]">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="flex items-center justify-center rounded-full bg-purple-100 px-2.5 py-0.5 font-mono text-xs font-bold text-purple-700">
+                  02
+                </span>
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-800">
+                  CREATE
+                </span>
+              </div>
+              <h3 className="mt-4 text-2xl sm:text-[26px] font-bold tracking-tight text-neutral-950 leading-snug">
+                We turn opportunities into content.
+              </h3>
+              <p className="mt-2.5 text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                RankUp creates SEO-optimized articles, supporting assets and
+                social posts &mdash; with the right structure and context, ready to
+                publish.
+              </p>
+            </div>
+
+            {/* Illustration 2 */}
+            <div className="relative mt-8 flex flex-col justify-end pt-4" aria-hidden="true">
+              {/* Background Sparkles with pulse */}
+              <div className="absolute top-0 right-4 flex items-center gap-1.5 animate-pulse">
+                <Sparkles className="size-4 text-purple-400 fill-purple-300" />
+                <Sparkles className="size-3 text-purple-300 fill-purple-200" />
+              </div>
+
+              {/* Overlapping Content Cards with Skeleton Loading Animations */}
+              <div className="relative w-full pb-2">
+                {/* Back card: Blog post */}
+                <div className="w-[84%] rounded-2xl border border-neutral-200/90 bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-transform duration-300 hover:scale-[101%]">
+                  <div className="flex items-center gap-2 pb-2.5 border-b border-neutral-100">
+                    <div className="flex size-5 items-center justify-center rounded bg-purple-50 text-purple-600">
+                      <FileText className="size-3.5" />
+                    </div>
+                    <span className="text-xs font-bold text-neutral-800">Blog post</span>
+                  </div>
+                  {/* Skeleton lines with shimmer animation */}
+                  <div className="mt-3 flex flex-col gap-2">
+                    <div className="h-2.5 w-3/4 rounded-full bg-neutral-200/90 skeleton-shimmer" />
+                    <div className="h-2 w-full rounded-full bg-neutral-100 skeleton-shimmer" />
+                    <div className="h-2 w-5/6 rounded-full bg-neutral-100 skeleton-shimmer" />
+                  </div>
+                  {/* Image placeholder with shimmer */}
+                  <div className="mt-3 flex h-14 w-full items-center justify-center rounded-lg border border-dashed border-neutral-200 bg-neutral-50/80 skeleton-shimmer">
+                    <ImageIcon className="size-4 text-neutral-300" />
+                  </div>
+                </div>
+
+                {/* Front card: LinkedIn post (overlapping) */}
+                <div className="absolute -bottom-1 right-0 w-[74%] rounded-2xl border border-neutral-200/90 bg-white p-3.5 shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[102%]">
+                  <div className="flex items-center gap-2 pb-2 border-b border-neutral-100">
+                    <span className="flex size-4 items-center justify-center rounded bg-[#0a66c2] text-[10px] font-bold text-white">
+                      in
+                    </span>
+                    <span className="text-xs font-bold text-neutral-800">LinkedIn post</span>
+                  </div>
+                  {/* Skeleton lines with shimmer animation */}
+                  <div className="mt-2.5 flex flex-col gap-1.5">
+                    <div className="h-2 w-full rounded-full bg-neutral-200/90 skeleton-shimmer" />
+                    <div className="h-1.5 w-4/5 rounded-full bg-neutral-100 skeleton-shimmer" />
+                  </div>
+                  {/* Image placeholder with shimmer */}
+                  <div className="mt-2.5 flex h-10 w-full items-center justify-center rounded-lg border border-neutral-100 bg-neutral-50/80 skeleton-shimmer">
+                    <ImageIcon className="size-3.5 text-neutral-300" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* Card 3: GROW */}
+          <article className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] border border-emerald-100/90 bg-gradient-to-b from-[#eefbf3] via-[#f7fdf9] to-[#ffffff] p-7 sm:p-8 shadow-[0_4px_24px_-4px_rgba(168,85,247,0.06)] min-h-[540px]">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 font-mono text-xs font-bold text-emerald-700">
+                  03
+                </span>
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-800">
+                  GROW
+                </span>
+              </div>
+              <h3 className="mt-4 text-2xl sm:text-[26px] font-bold tracking-tight text-neutral-950 leading-snug">
+                We help you grow.
+              </h3>
+              <p className="mt-2.5 text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                Your content gets published, gains visibility, and keeps
+                climbing &mdash; while RankUp continues to find the next
+                opportunity.
+              </p>
+            </div>
+
+            {/* Illustration 3 */}
+            <div className="relative mt-8 flex flex-col justify-end pt-4" aria-hidden="true">
+              <div className="relative w-full rounded-2xl border border-neutral-200/90 bg-white p-4 shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+                {/* Top bar */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs sm:text-[13px] font-bold text-neutral-900">
+                    Organic traffic
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700">
+                    <ArrowUpRight className="size-3.5 stroke-[2.5]" /> +128%
+                  </span>
+                </div>
+
+                {/* Growth Chart Area */}
+                <div className="relative mt-4 h-28 w-full">
+                  {/* SVG Chart with animated curved stroke and gradient area fill */}
+                  <svg className="h-20 w-full overflow-visible" viewBox="0 0 240 80" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="growthAreaGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#10b981" stopOpacity="0.25" />
+                        <stop offset="100%" stopColor="#10b981" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    {/* Area fill */}
+                    <path
+                      className="growth-area-animate"
+                      d="M 0,65 Q 40,55 80,60 T 160,35 T 240,15 L 240,80 L 0,80 Z"
+                      fill="url(#growthAreaGrad)"
+                    />
+                    {/* Line stroke */}
+                    <path
+                      className="growth-line-animate"
+                      d="M 0,65 Q 40,55 80,60 T 160,35 T 240,15"
+                      fill="none"
+                      stroke="#10b981"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    {/* Glowing end point */}
+                    <circle className="growth-dot-animate" cx="240" cy="15" r="4" fill="#10b981" />
+                    <circle className="growth-dot-animate" cx="240" cy="15" r="7" fill="#10b981" fillOpacity="0.3" />
+                  </svg>
+
+
+                  {/* Month labels */}
+                  <div className="mt-2 flex justify-between text-[10px] font-medium text-neutral-400">
+                    <span>Jan</span>
+                    <span>Feb</span>
+                    <span>Mar</span>
+                    <span>Apr</span>
+                    <span>May</span>
+                    <span>Jun</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function ProductStory() {
   return (
     <section
@@ -214,36 +508,122 @@ export function ProductStory() {
       aria-labelledby="formats-title"
     >
       <div className="wrap format-inner">
-        <div className="format-header">
-          <h2 id="formats-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
-            Get found on Google and AI search organically.
-          </h2>
+        <div className="format-header flex">
+          <div id="formats-title" className="text-5xl font-medium tracking-tight text-black leading-[1.1]">
+            Get found organically on <MorphingText texts={texts} /><br /> Searches
+          </div>
+
         </div>
 
         <div className="format-gallery">
-          {contentFormats.map((format, index) => (
-            <article
-              className={`format-panel format-${index}`}
-              key={format.name}
-              tabIndex={0}
-            >
-              <div className="format-title">
-                <span>{format.name}</span>
-                <ArrowUpRight size={17} />
-              </div>
-              <div className="format-output">
-                <strong>{format.title}</strong>
-                <div className="format-lines">
-                  {format.lines.map((line) => (
-                    <span key={line}>
-                      <i />
-                      {line}
+          {contentFormats.map((format, index) => {
+            const FormatIcon = format.icon;
+
+            return (
+              <article
+                className={`format-panel format-${index}`}
+                key={format.name}
+                tabIndex={0}
+              >
+                <div className="format-title">
+                  <div className="format-label">
+                    <span className="format-mark" aria-hidden="true">
+                      <FormatIcon size={10} />
                     </span>
-                  ))}
+                    <span>{format.name}</span>
+                  </div>
+                  <span className="format-arrow" aria-hidden="true">
+                    <ArrowUpRight size={16} />
+                  </span>
                 </div>
-              </div>
-            </article>
-          ))}
+                <div className="format-output">
+                  <strong>{format.title}</strong>
+
+                  <div className="format-ui-preview" aria-hidden="true">
+                    {index === 0 && (
+                      <div className="format-blog-preview">
+                        <div className="format-preview-bar">
+                          <span>Article brief</span>
+                          <b>Ready</b>
+                        </div>
+                        <p>Hybrid work planning guide</p>
+                        <div className="format-copy-lines">
+                          <i />
+                          <i />
+                          <i />
+                        </div>
+                        <div className="format-preview-meta">
+                          <span>8 internal links</span>
+                          <span>Intent matched</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {index === 1 && (
+                      <div className="format-ebook-preview">
+                        <div className="format-ebook-cover">
+                          <BookOpen size={20} />
+                          <span>The practical guide</span>
+                          <b>Content that compounds</b>
+                        </div>
+                        <div className="format-chapter-list">
+                          <span><i>01</i>Opportunity</span>
+                          <span><i>02</i>Strategy</span>
+                          <span><i>03</i>Distribution</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {index === 2 && (
+                      <div className="format-report-preview">
+                        <div className="format-preview-bar">
+                          <span>Research summary</span>
+                          <b>Verified</b>
+                        </div>
+                        <div className="format-report-body">
+                          <div className="format-chart-bars">
+                            <i />
+                            <i />
+                            <i />
+                            <i />
+                            <i />
+                          </div>
+                          <div className="format-findings">
+                            <span>Key finding</span>
+                            <b>Demand is shifting toward specific, expert-led answers.</b>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {index === 3 && (
+                      <div className="format-linkedin-preview">
+                        <div className="format-social-head">
+                          <span>R</span>
+                          <div>
+                            <b>Project RankUp</b>
+                            <i>Founder insight</i>
+                          </div>
+                          <Link2 size={17} />
+                        </div>
+                        <div className="format-copy-lines">
+                          <i />
+                          <i />
+                          <i />
+                        </div>
+                        <div className="format-carousel-beats">
+                          <span>01</span>
+                          <span>02</span>
+                          <span>03</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -253,36 +633,34 @@ export function ProductStory() {
 export function MeasureImprove() {
   return (
     <section
-      className="performance-section section-space"
+      className="connections-section section-space"
       id="improve"
-      data-motion-section="performance"
-      aria-labelledby="performance-title"
+      aria-labelledby="connections-title"
     >
-      <div className="wrap performance-inner">
-        <div className="performance-copy">
-          <span>SEE WHAT&apos;S WORKING</span>
-          <h2 id="performance-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
-            See how your content performs after you publish.
+      <div className="wrap connections-inner">
+        <div className="connections-copy">
+          <h2 id="connections-title">
+            Connect in just one click.
           </h2>
           <p>
-            Rankup tracks your rankings, clicks, impressions, and content performance so you can see what&apos;s growing and what needs attention.
+            Connect the platforms you already use, and RankUp will handle
+            publishing your content for you.
           </p>
         </div>
 
-        <div className="performance-canvas" aria-hidden="true">
-          <div className="signal-grid" />
-          {performancePages.map((page) => {
-            const Icon = page.icon;
+        <div className="platform-grid" aria-label="Publishing platforms">
+          {publishingPlatforms.map((platform) => {
+            const Icon = platform.icon;
             return (
-              <div
-                className={`performance-node performance-${page.status}`}
-                key={page.name}
+              <article
+                className={`platform-card ${platform.className}`}
+                key={platform.name}
               >
-                <Icon size={15} />
-                <strong>{page.name}</strong>
-                <span>{page.status}</span>
-                <i>{page.metric}</i>
-              </div>
+                <span className="platform-icon" aria-hidden="true">
+                  <Icon />
+                </span>
+                <strong>{platform.name}</strong>
+              </article>
             );
           })}
         </div>
