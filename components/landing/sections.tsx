@@ -4,16 +4,21 @@ import {
   ArrowUpRight,
   BarChart3,
   Check,
+  Compass,
   FileText,
+  Layers,
   Link2,
   PenLine,
   Plus,
   RefreshCw,
   Search,
+  ShieldCheck,
+  Sparkles,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
 import { assets, links, testimonials, faqs } from "@/content/landing";
+import { AnimatedList } from "@/components/ui/animated-list";
 
 const contentFormats = [
   {
@@ -59,50 +64,142 @@ const performancePages = [
   },
 ];
 
-const workloadSignals = [
-  "Keyword research",
-  "Competitor gaps",
-  "Content briefs",
-  "Search intent",
-  "Internal links",
-  "Rank tracking",
-  "Traffic decay",
-  "Topic clusters",
-  "AI citations",
-  "Refresh queue",
-  "Lead capture",
-  "Performance audits",
+const workloadItems = [
+  {
+    name: "Keyword research",
+    description: "High-intent queries & search volume discovered",
+    time: "15m ago",
+    icon: Search,
+    color: "#5c55f2",
+  },
+  {
+    name: "Competitor gaps",
+    description: "3 high-value keyword opportunities detected",
+    time: "10m ago",
+    icon: BarChart3,
+    color: "#3b82f6",
+  },
+  {
+    name: "Content briefs",
+    description: "Structured outline & target headings prepared",
+    time: "6m ago",
+    icon: FileText,
+    color: "#10b981",
+  },
+  {
+    name: "Search intent",
+    description: "Informational & commercial intent mapped",
+    time: "4m ago",
+    icon: Compass,
+    color: "#f59e0b",
+  },
+  {
+    name: "Internal links",
+    description: "4 contextual link connections suggested",
+    time: "2m ago",
+    icon: Link2,
+    color: "#8b5cf6",
+  },
+  {
+    name: "Rank tracking",
+    description: "Positions updated across search engines",
+    time: "Just now",
+    icon: TrendingUp,
+    color: "#06b6d4",
+  },
+  {
+    name: "Traffic decay",
+    description: "Identified pages needing content refresh",
+    time: "Just now",
+    icon: RefreshCw,
+    color: "#ec4899",
+  },
+  {
+    name: "Topic clusters",
+    description: "Connected authority pillar strategy organized",
+    time: "Just now",
+    icon: Layers,
+    color: "#14b8a6",
+  },
+  {
+    name: "AI citations",
+    description: "Perplexity & ChatGPT source readiness verified",
+    time: "Just now",
+    icon: Sparkles,
+    color: "#6366f1",
+  },
+  {
+    name: "Performance audits",
+    description: "Actionable technical & content health score",
+    time: "Just now",
+    icon: ShieldCheck,
+    color: "#10b981",
+  },
 ];
+
+function WorkflowItemCard({
+  name,
+  description,
+  icon: Icon,
+  color,
+  time,
+}: {
+  name: string;
+  description: string;
+  icon: typeof Search;
+  color: string;
+  time: string;
+}) {
+  return (
+    <figure className="relative mx-auto min-h-fit w-full cursor-pointer overflow-hidden rounded-2xl p-4 sm:p-5 transition-all duration-200 ease-in-out hover:scale-[101%] bg-white shadow-[0_4px_24px_-4px_rgba(0,0,0,0.07),0_2px_8px_-2px_rgba(0,0,0,0.04)] border border-neutral-200/90">
+      <div className="flex flex-row items-center gap-4">
+        <div
+          className="flex size-12 items-center justify-center rounded-xl flex-shrink-0"
+          style={{ backgroundColor: `${color}15`, color: color }}
+        >
+          <Icon size={22} />
+        </div>
+        <div className="flex flex-col overflow-hidden flex-1 min-w-0">
+          <figcaption className="flex flex-row items-center justify-between text-sm sm:text-base text-neutral-900 gap-2">
+            <span className="truncate font-semibold">{name}</span>
+            <span className="text-xs text-neutral-400 font-mono flex-shrink-0">{time}</span>
+          </figcaption>
+          <p className="text-xs sm:text-sm text-neutral-500 truncate mt-1">{description}</p>
+        </div>
+      </div>
+    </figure>
+  );
+}
 
 export function WorkflowContext() {
   return (
     <section
+      id="workflow"
       className="overload-section section-space"
       data-motion-section="overload"
       aria-labelledby="overload-title"
     >
-      <div className="workload-word-field" aria-hidden="true">
-        {workloadSignals.map((signal, index) => (
-          <span
-            className={`workload-word workload-word-${index}`}
-            key={signal}
-          >
-            {signal}
-          </span>
-        ))}
-      </div>
       <div className="wrap overload-inner">
-        <div className="overload-copy">
-          <span>GROWING SHOULDN&apos;T MEAN DOING EVERYTHING YOURSELF</span>
-          <h2 id="overload-title">
+        <div className="flex max-w-[540px] flex-col items-start text-left">
+          <span className="mb-[18px] block font-mono text-[10px] uppercase tracking-[0.09em] text-neutral-400">
+            GROWING SHOULDN&apos;T MEAN DOING EVERYTHING YOURSELF
+          </span>
+          <h2
+            id="overload-title"
+            className="text-6xl font-medium tracking-tight text-black leading-[1.1]"
+          >
             Growing your traffic shouldn&apos;t become another full-time job.
           </h2>
-          <p>
-            Keyword research, competitor analysis, content briefs, writing, internal linking, rank tracking, and performance audits—all competing for your time. Rankup connects the entire workflow so you can focus on growth, not the busywork.
-          </p>
         </div>
 
-
+        <div className="relative flex w-full max-w-[520px] flex-col overflow-hidden h-[480px] [mask-image:linear-gradient(to_bottom,black_65%,transparent_100%)] justify-self-end">
+          <AnimatedList delay={1400} className="w-full gap-4">
+            {workloadItems.map((item) => (
+              <WorkflowItemCard {...item} key={item.name} />
+            ))}
+          </AnimatedList>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white via-white/80 to-transparent" />
+        </div>
       </div>
     </section>
   );
@@ -117,11 +214,11 @@ export function ProductStory() {
       aria-labelledby="formats-title"
     >
       <div className="wrap format-inner">
-
         <div className="format-header">
-          <h2 id="formats-title">Get found on Google and AI search organically.</h2>
+          <h2 id="formats-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
+            Get found on Google and AI search organically.
+          </h2>
         </div>
-
 
         <div className="format-gallery">
           {contentFormats.map((format, index) => (
@@ -164,7 +261,7 @@ export function MeasureImprove() {
       <div className="wrap performance-inner">
         <div className="performance-copy">
           <span>SEE WHAT&apos;S WORKING</span>
-          <h2 id="performance-title">
+          <h2 id="performance-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
             See how your content performs after you publish.
           </h2>
           <p>
@@ -205,7 +302,7 @@ export function AgentMode() {
       <div className="wrap compound-inner">
         <div className="compound-copy">
           <span>EVERY RESULT MAKES THE NEXT MOVE CLEARER</span>
-          <h2 id="compound-title">
+          <h2 id="compound-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
             The loop compounds
             <br />
             as the system learns.
@@ -271,7 +368,9 @@ export function Proof() {
       aria-labelledby="proof-title"
     >
       <div className="wrap proof-editorial">
-        <h2 id="proof-title">Proof from teams already doing the work.</h2>
+        <h2 id="proof-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
+          Proof from teams already doing the work.
+        </h2>
         <div className="testimonial-transition">
           <figure className="testimonial-pane testimonial-taggd">
             <div className="testimonial-logo">
@@ -317,7 +416,9 @@ export function FaqAndCta() {
         aria-labelledby="faq-title"
       >
         <div className="wrap faq-inner">
-          <h2 id="faq-title">Questions worth answering.</h2>
+          <h2 id="faq-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
+            Questions worth answering.
+          </h2>
           <div className="faq-list">
             {faqs.map((f) => (
               <details key={f.question}>
@@ -348,7 +449,7 @@ export function FaqAndCta() {
           </span>
         </div>
         <div className="wrap final-cta">
-          <h2>
+          <h2 className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
             Grow your traffic without
             <br />
             growing your workload.
@@ -366,9 +467,12 @@ export function SiteFooter() {
   return (
     <footer className="wrap site-footer">
       <a href="#main" className="brand">
-        <Image src={assets.rankupMark} alt="" width={22} height={22} />
-        <span>
-          project<span className="brand-light">rankup</span>
+        <Image src={assets.rankupMark} alt="" width={42} height={42} />
+        <span className="brand-wordmark" aria-label="Project Rankup">
+          <span className="brand-project">Project</span>
+          <span className="brand-rank">
+            Rank<span className="brand-light">up</span>
+          </span>
         </span>
       </a>
       <span>Visibility is just the beginning.</span>

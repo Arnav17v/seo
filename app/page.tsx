@@ -1,6 +1,5 @@
 import { SiteHeader } from "@/components/landing/site-header";
 import { Hero } from "@/components/landing/hero";
-import { GrowthLoop } from "@/components/landing/growth-loop/growth-loop";
 import {
   WorkflowContext,
   ProductStory,
@@ -21,22 +20,6 @@ export default function Page() {
           <Hero />
         </section>
         <WorkflowContext />
-        <section
-          id="workflow"
-          className="goal-loop-section"
-          data-motion-section="goal-loop"
-          aria-labelledby="goal-loop-title"
-        >
-          <div className="wrap goal-loop-heading">
-            <span>01 / ONE OPPORTUNITY THROUGH THE SYSTEM</span>
-            <h2 id="goal-loop-title">
-              Give Rankup the goal.
-              <br />
-              It handles the workflow.
-            </h2>
-          </div>
-          <GrowthLoop />
-        </section>
         <ProductStory />
         <MeasureImprove />
         <AgentMode />

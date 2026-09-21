@@ -193,9 +193,64 @@
 .app-tabs > span {
   padding-bottom: 10px;
 }
-.app-tabs .selected {
-  color: #b8b1f2;
-  border-bottom: 1px solid #aba0ff;
+.opportunity-card {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border: 1px solid #363742;
+  border-radius: 6px;
+  background: #1c1d22;
+}
+.opportunity-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a09aeb;
+  margin-bottom: 6px;
+}
+.opportunity-card strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 550;
+  color: #e4e4ed;
+}
+.opportunity-card p {
+  font-size: 10px;
+  line-height: 1.6;
+  color: #8c8f9f;
+  margin-top: 6px;
+}
+.opportunity-stats {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.opportunity-stats span {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 4px;
+  font-size: 8px;
+  font-family: var(--font-mono);
+  background: #2b283d;
+  color: #c4bcfa;
+  border: 1px solid #484167;
+}
+.opportunity-chips {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.opportunity-chips span {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 4px;
+  border: 1px solid #33353e;
+  background: #191a1e;
+  font-size: 9px;
+  color: #888b9a;
 }
 .table-tools {
   display: flex;
@@ -743,6 +798,227 @@
 .product-title .mock-title {
   font-size: 20px;
 }
+
+/* Light product mockup treatment. */
+.loop-intro,
+.demo-label,
+.loop-counter,
+.loop-close {
+  color: var(--muted);
+}
+
+.growth-loop {
+  background: transparent;
+}
+
+.loop-shell {
+  border-color: var(--border-cool);
+  background: var(--surface);
+  box-shadow: 0 24px 70px rgb(var(--shadow-cool) / 0.1);
+}
+
+.app-sidebar {
+  border-right-color: var(--border-cool);
+  background: var(--surface-soft);
+}
+
+.workspace-monogram,
+.avatar {
+  border-color: #d7def2;
+  background: var(--surface-strong);
+  color: var(--ink);
+}
+
+.workspace-name,
+.product-state,
+.product-title .mock-title,
+.loop-caption strong,
+.audit-document strong,
+.metric-labels strong,
+.context-tone strong {
+  color: var(--ink);
+}
+
+.workspace-name > span,
+.sidebar-item,
+.sidebar-project,
+.product-chrome,
+.app-breadcrumb,
+.demo-label,
+.table-tools,
+.table-head,
+.product-bottom,
+.calendar-day,
+.calendar-cell,
+.calendar-quiet,
+.context-panel,
+.context-tone,
+.chart-axis,
+.audit-document div > span,
+.audit-list small,
+.audit-kind,
+.loop-caption p {
+  color: var(--muted);
+}
+
+.sidebar-rule,
+.product-chrome,
+.app-tabs,
+.product-bottom,
+.opportunity-keyword,
+.opportunity-card,
+.calendar-cell,
+.editor-paper,
+.context-tone,
+.audit-document,
+.audit-list > div,
+.table-row {
+  border-color: var(--border-cool);
+}
+
+.opportunity-card {
+  background: var(--surface-strong);
+}
+
+.opportunity-label {
+  color: var(--indigo);
+}
+
+.opportunity-card strong {
+  color: var(--ink);
+}
+
+.opportunity-card p {
+  color: var(--muted);
+}
+
+.opportunity-stats span {
+  background: rgb(92 85 242 / 0.08);
+  color: var(--indigo);
+  border-color: rgb(92 85 242 / 0.18);
+}
+
+.opportunity-chips span {
+  border-color: var(--border-cool);
+  background: var(--surface-strong);
+  color: var(--muted);
+}
+
+.sidebar-item.is-active,
+.highlight-row,
+.context-note,
+.calendar-item {
+  background: rgb(92 85 242 / 0.08);
+  color: var(--ink);
+  border-color: rgb(92 85 242 / 0.18) !important;
+}
+
+.ui-chip,
+.play-control {
+  border-color: var(--border-cool);
+  color: #3a4262;
+  background: rgb(255 255 255 / 0.54);
+}
+
+.app-tabs {
+  color: var(--muted);
+}
+
+.app-tabs .selected,
+.product-bottom > span:last-child,
+.ui-primary,
+.loop-close.is-complete,
+.stage-tab.active,
+.stage-tab.active .stage-number {
+  color: var(--ink);
+}
+
+.app-tabs .selected,
+.stage-tab.active .tab-track {
+  border-bottom-color: var(--indigo);
+  background: var(--indigo);
+}
+
+.row-check {
+  border-color: #cbd4f0;
+  color: var(--ink);
+}
+
+.highlight-row .row-check {
+  background: var(--indigo);
+  border-color: var(--indigo);
+  color: #fff;
+}
+
+.intent,
+.opportunity-keyword > svg,
+.context-panel svg {
+  color: #315f80;
+}
+
+.fit,
+.document-lines i,
+.chart-grid {
+  background: #dfe4f4;
+}
+
+.fit i,
+.metric-dot,
+.audit-marker,
+.chart-bars i {
+  background: #7a8195;
+}
+
+.metric-dot.green,
+.audit-marker.green,
+.chart-bars i:nth-child(3n) {
+  background: var(--sky);
+}
+
+.editor-paper {
+  background: var(--surface-strong);
+}
+
+.editor-paper > p,
+.evidence-grid p,
+.context-note p {
+  color: var(--muted);
+}
+
+.chart-grid {
+  background: repeating-linear-gradient(
+    to top,
+    #dfe4f4 0,
+    #dfe4f4 1px,
+    transparent 1px,
+    transparent 35px
+  );
+}
+
+.loop-controls {
+  border-bottom-color: var(--border-cool);
+}
+
+.stage-tab {
+  color: var(--muted);
+}
+
+.stage-number {
+  color: #7a8195;
+}
+
+.product-title .mock-title {
+  font-size: 18px;
+}
+
+.loop-caption strong {
+  font-size: 12px;
+}
+
+.loop-caption p {
+  font-size: 11px;
+}
+
 @media (max-width: 1000px) {
   .loop-shell {
     grid-template-columns: 165px 1fr;
@@ -836,6 +1112,24 @@
   }
 
   /* Discover stage */
+  .opportunity-card {
+    padding: 14px;
+    margin-top: 14px;
+  }
+  .opportunity-card strong {
+    font-size: 14px;
+  }
+  .opportunity-card p {
+    font-size: 10px;
+  }
+  .opportunity-stats span,
+  .opportunity-chips span {
+    font-size: 8px;
+  }
+  .opportunity-chips {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
   .app-tabs {
     gap: 12px;
     font-size: 10px;

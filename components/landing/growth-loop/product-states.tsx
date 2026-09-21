@@ -8,7 +8,6 @@ import {
   Globe,
   ChevronDown,
   CircleCheck,
-  SlidersHorizontal,
   ArrowRight,
   TrendingUp,
   ShieldCheck,
@@ -21,53 +20,28 @@ export function ProductStates({ stage }: { stage: number }) {
         <>
           <div className="product-title">
             <div>
-              <span className="app-breadcrumb">KEYWORD DISCOVERY</span>
+              <span className="app-breadcrumb">DISCOVER</span>
               <strong className="mock-title">Find your next opportunity</strong>
             </div>
             <span className="ui-chip">
-              <Globe size={12} /> Northstar Studio
+              <Globe size={12} /> Rankup Studio
             </span>
           </div>
-          <div className="app-tabs">
-            <span className="selected">Organic keywords</span>
-            <span>Competitor keywords</span>
-            <span>Search Console</span>
-          </div>
-          <div className="table-tools">
-            <span>
-              <Search size={13} /> workspace planning
-            </span>
-            <SlidersHorizontal size={14} />
-          </div>
-          <div className="keyword-table">
-            <div className="table-row table-head">
-              <span>Keyword</span>
-              <span>Intent</span>
-              <span>Fit</span>
+          <div className="opportunity-card">
+            <span className="opportunity-label">Best next topic</span>
+            <strong>workspace planning guide</strong>
+            <p>
+              Clear search demand, useful intent, and a strong fit for the
+              business.
+            </p>
+            <div className="opportunity-stats">
+              <span>Intent: Informational</span>
+              <span>Fit: High</span>
             </div>
-            {[
-              "workspace planning guide",
-              "office space planning",
-              "hybrid workspace design",
-            ].map((word, i) => (
-              <div
-                className={`table-row ${i === 0 ? "highlight-row" : ""}`}
-                key={word}
-              >
-                <span>
-                  <span className="row-check">
-                    {i === 0 && <Check size={10} />}
-                  </span>
-                  {word}
-                </span>
-                <span className="intent">
-                  {i === 1 ? "Commercial" : "Informational"}
-                </span>
-                <span className="fit">
-                  <i style={{ width: `${80 - i * 13}%` }} />
-                </span>
-              </div>
-            ))}
+          </div>
+          <div className="opportunity-chips">
+            <span>office space planning</span>
+            <span>hybrid workspace design</span>
           </div>
           <div className="product-bottom">
             <span>
@@ -118,7 +92,7 @@ export function ProductStates({ stage }: { stage: number }) {
             </div>
           </div>
           <div className="product-bottom">
-            <span>Northstar Studio</span>
+            <span>Rankup Studio</span>
             <span className="ui-primary">
               Add to content plan <ArrowRight size={12} />
             </span>
@@ -129,7 +103,7 @@ export function ProductStates({ stage }: { stage: number }) {
         <>
           <div className="product-title">
             <div>
-              
+              <span className="app-breadcrumb">CONTENT CALENDAR</span>
               <strong className="mock-title">A plan you can work from</strong>
             </div>
             <span className="ui-chip">
@@ -304,7 +278,7 @@ export function ProductStates({ stage }: { stage: number }) {
             <FileText size={20} />
             <div>
               <strong>Workspace planning guide</strong>
-              <span>Northstar Studio / Journal</span>
+              <span>Rankup Studio / Journal</span>
             </div>
             <ArrowUpRight size={16} />
           </div>

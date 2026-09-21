@@ -124,9 +124,9 @@ export function GrowthLoop() {
       </div>
       <div className="loop-shell">
         <aside className="app-sidebar" aria-hidden="true">
-          <div className="workspace-monogram">N</div>
+          <div className="workspace-monogram">R</div>
           <span className="workspace-name">
-            Northstar Studio <span>Workspace consulting</span>
+            Rankup Studio <span>Workspace consulting</span>
           </span>
           <div className="sidebar-rule" />
           {stages.map((s, i) => {
@@ -148,10 +148,10 @@ export function GrowthLoop() {
         <div className="main-product">
           <div className="product-chrome">
             <span>
-              Northstar Studio <span className="slash">/</span>{" "}
+              Rankup Studio <span className="slash">/</span>{" "}
               {stages[active].detail}
             </span>
-            <span className="avatar">N</span>
+            <span className="avatar">R</span>
           </div>
           <div className="product-stage-window">
             <div ref={panel} className="animated-panel">

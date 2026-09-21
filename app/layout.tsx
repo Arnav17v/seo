@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import "../styles/product.css";
 import "./globals.css";
-const sans = Geist({ subsets: ["latin"], variable: "--font-sans" });
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 export const metadata: Metadata = {
   metadataBase: new URL("https://projectrankup.com"),
@@ -19,7 +22,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={cn(mono.variable, "font-sans", geist.variable)}>
       <body>
         <a className="skip-link" href="#main">
           Skip to content

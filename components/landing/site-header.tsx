@@ -6,9 +6,12 @@ import { assets, links } from "@/content/landing";
 export function Brand() {
   return (
     <span className="brand">
-      <Image src={assets.rankupMark} alt="" width={28} height={28} />
-      <span>
-        project<span className="brand-light">rankup</span>
+      <Image src={assets.rankupMark} alt="" width={42} height={42} />
+      <span className="brand-wordmark" aria-label="Project Rankup">
+        <span className="brand-project">Project</span>
+        <span className="brand-rank">
+          Rank<span className="brand-light">up</span>
+        </span>
       </span>
     </span>
   );
