@@ -1,57 +1,35 @@
 import Image from "next/image";
-import { MorphingText } from "@/components/ui/morphing-text";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { SiShopify, SiStrapi, SiWordpress } from "react-icons/si";
 import {
   ArrowRight,
   ArrowUpRight,
   BarChart2,
-  BarChart3,
-  BookOpen,
   Check,
   Compass,
-  FileChartColumn,
+  EyeOff,
+  FileClock,
   FileText,
+  Hourglass,
   Image as ImageIcon,
   Layers,
   Link2,
   PenLine,
   Plus,
-  RefreshCw,
   Search,
-  ShieldCheck,
+  SearchX,
+  ShieldAlert,
   Sparkles,
-  TrendingUp,
+  TrendingDown,
+  TriangleAlert,
+  Unlink,
 } from "lucide-react";
 import { assets, links, testimonials, faqs } from "@/content/landing";
 import { AnimatedList } from "@/components/ui/animated-list";
-
-const texts = [
-  "Google",
-  "AI"
-]
-const contentFormats = [
-  {
-    name: "Blog",
-    title: "Answer what your customers are searching for and bring them to your business.",
-    icon: FileText,
-  },
-  {
-    name: "Ebook",
-    title: "Turn interested visitors into leads with something worth downloading.",
-    icon: BookOpen,
-  },
-  {
-    name: "Whitepaper",
-    title: "Build authority with the research and expertise your buyers trust.",
-    icon: FileChartColumn,
-  },
-  {
-    name: "LinkedIn",
-    title: "Reach potential customers where they already discover ideas and businesses.",
-    icon: Link2,
-  },
-];
+import { StripedPattern } from "@/components/magicui/striped-pattern";
+import { ConnectionsBeam } from "@/components/landing/connections-beam";
+import { CompoundLoop } from "@/components/landing/compound-loop";
+import { FormatSpread } from "@/components/landing/format-spread";
 
 const publishingPlatforms = [
   { name: "LinkedIn", icon: FaLinkedinIn, className: "platform-linkedin" },
@@ -60,107 +38,167 @@ const publishingPlatforms = [
   { name: "Strapi", icon: SiStrapi, className: "platform-strapi" },
 ];
 
+/**
+ * The backlog you inherit without RankUp: every one of these is manual work
+ * already running late, so the queue reads as debt piling up rather than a
+ * feed of things getting done.
+ */
 const workloadItems = [
   {
     name: "Keyword research",
-    description: "High-intent queries & search volume discovered",
-    time: "15m ago",
-    icon: Search,
-    color: "#5c55f2",
-  },
-  {
-    name: "Competitor gaps",
-    description: "3 high-value keyword opportunities detected",
-    time: "10m ago",
-    icon: BarChart3,
-    color: "#3b82f6",
-  },
-  {
-    name: "Content briefs",
-    description: "Structured outline & target headings prepared",
-    time: "6m ago",
-    icon: FileText,
-    color: "#10b981",
-  },
-  {
-    name: "Search intent",
-    description: "Informational & commercial intent mapped",
-    time: "4m ago",
-    icon: Compass,
-    color: "#f59e0b",
-  },
-  {
-    name: "Internal links",
-    description: "4 contextual link connections suggested",
-    time: "2m ago",
-    icon: Link2,
-    color: "#8b5cf6",
-  },
-  {
-    name: "Rank tracking",
-    description: "Positions updated across search engines",
-    time: "Just now",
-    icon: TrendingUp,
-    color: "#06b6d4",
+    description: "Still no list for next month's content",
+    status: "Overdue",
+    time: "11d late",
+    icon: SearchX,
+    severity: "critical",
   },
   {
     name: "Traffic decay",
-    description: "Identified pages needing content refresh",
-    time: "Just now",
-    icon: RefreshCw,
-    color: "#ec4899",
+    description: "18 pages quietly slipping down page two",
+    status: "Dropping",
+    time: "6 wks",
+    icon: TrendingDown,
+    severity: "critical",
   },
   {
-    name: "Topic clusters",
-    description: "Connected authority pillar strategy organized",
-    time: "Just now",
-    icon: Layers,
-    color: "#14b8a6",
+    name: "Content briefs",
+    description: "9 posts stuck waiting on an outline",
+    status: "Blocked",
+    time: "no owner",
+    icon: FileClock,
+    severity: "critical",
+  },
+  {
+    name: "Internal links",
+    description: "31 orphan pages with nothing pointing at them",
+    status: "Unfixed",
+    time: "never run",
+    icon: Unlink,
+    severity: "warning",
+  },
+  {
+    name: "Competitor gaps",
+    description: "4 rivals outranking you on the terms that pay",
+    status: "Losing",
+    time: "daily",
+    icon: TriangleAlert,
+    severity: "critical",
+  },
+  {
+    name: "Rank tracking",
+    description: "Last checked by hand, in a spreadsheet",
+    status: "Stale",
+    time: "21d old",
+    icon: Hourglass,
+    severity: "warning",
   },
   {
     name: "AI citations",
-    description: "Perplexity & ChatGPT source readiness verified",
-    time: "Just now",
-    icon: Sparkles,
-    color: "#6366f1",
+    description: "ChatGPT keeps citing them, never you",
+    status: "Invisible",
+    time: "ongoing",
+    icon: EyeOff,
+    severity: "critical",
   },
   {
-    name: "Performance audits",
-    description: "Actionable technical & content health score",
-    time: "Just now",
-    icon: ShieldCheck,
-    color: "#10b981",
+    name: "Search intent",
+    description: "Half your posts answer the wrong question",
+    status: "Mismatched",
+    time: "unreviewed",
+    icon: Compass,
+    severity: "warning",
   },
-];
+  {
+    name: "Topic clusters",
+    description: "Pillar plan is still a doc nobody opened",
+    status: "Untouched",
+    time: "4 months",
+    icon: Layers,
+    severity: "warning",
+  },
+  {
+    name: "Technical audit",
+    description: "Crawl errors from the last run, still unread",
+    status: "Ignored",
+    time: "6 mo late",
+    icon: ShieldAlert,
+    severity: "critical",
+  },
+] as const;
+
+type WorkloadSeverity = (typeof workloadItems)[number]["severity"];
+
+const severityStyles: Record<
+  WorkloadSeverity,
+  { card: string; rail: string; tile: string; chip: string; time: string }
+> = {
+  critical: {
+    card: "border-red-200/80 bg-[#fff6f5] shadow-[0_4px_22px_-8px_rgba(220,38,38,0.28)]",
+    rail: "bg-red-500",
+    tile: "bg-red-100 text-red-600",
+    chip: "bg-red-600 text-white",
+    time: "text-red-400",
+  },
+  warning: {
+    card: "border-amber-200/80 bg-[#fffaf0] shadow-[0_4px_22px_-8px_rgba(217,119,6,0.24)]",
+    rail: "bg-amber-500",
+    tile: "bg-amber-100 text-amber-600",
+    chip: "bg-amber-500 text-white",
+    time: "text-amber-500",
+  },
+};
 
 function WorkflowItemCard({
   name,
   description,
   icon: Icon,
-  color,
+  status,
   time,
+  severity,
 }: {
   name: string;
   description: string;
   icon: typeof Search;
-  color: string;
+  status: string;
   time: string;
+  severity: WorkloadSeverity;
 }) {
+  const tone = severityStyles[severity];
+
   return (
-    <figure className="relative mx-auto min-h-fit w-full cursor-pointer overflow-hidden rounded-2xl p-4 sm:p-5 transition-all duration-200 ease-in-out hover:scale-[101%] bg-white shadow-[0_4px_24px_-4px_rgba(0,0,0,0.07),0_2px_8px_-2px_rgba(0,0,0,0.04)] border border-neutral-200/90">
+    <figure
+      className={`relative mx-auto min-h-fit w-full cursor-pointer overflow-hidden rounded-2xl border p-4 pl-5 sm:p-5 sm:pl-6 transition-all duration-200 ease-in-out hover:scale-[101%] ${tone.card}`}
+    >
+      <span
+        className={`absolute inset-y-0 left-0 w-[3px] ${tone.rail}`}
+        aria-hidden="true"
+      />
       <div className="flex flex-row items-center gap-4">
         <div
-          className="flex size-12 items-center justify-center rounded-xl flex-shrink-0"
-          style={{ backgroundColor: `${color}15`, color: color }}
+          className={`flex size-12 sm:size-14 items-center justify-center rounded-xl flex-shrink-0 ${tone.tile}`}
         >
-          <Icon size={22} />
+          <Icon size={24} strokeWidth={2} />
         </div>
         <div className="flex flex-col overflow-hidden flex-1 min-w-0">
-          <figcaption className="flex flex-row items-center justify-between text-sm sm:text-base text-neutral-900 gap-2">
-            <span className="truncate font-semibold">{name}</span>
-            <span className="text-xs text-neutral-400 font-mono flex-shrink-0">{time}</span>
+          <figcaption className="flex flex-row items-center justify-between gap-2 text-[15px] sm:text-[17px] text-neutral-900">
+            <span className="flex min-w-0 items-center gap-2">
+              <span className="truncate font-semibold">{name}</span>
+              <span
+                className={`flex-shrink-0 rounded-full px-2 py-[3px] font-mono text-[9px] font-bold uppercase tracking-[0.06em] ${tone.chip}`}
+              >
+                {status}
+              </span>
+            </span>
+            {/* Secondary to the status chip, so it yields on narrow screens. */}
+            <span
+              className={`hidden sm:inline flex-shrink-0 font-mono text-[11px] ${tone.time}`}
+            >
+              {time}
+            </span>
           </figcaption>
-          <p className="text-xs sm:text-sm text-neutral-500 truncate mt-1">{description}</p>
+          <p className="mt-1 truncate text-[13px] sm:text-sm text-neutral-600">
+            {description}
+          </p>
         </div>
       </div>
     </figure>
@@ -195,13 +233,13 @@ export function WorkflowContext() {
           </div>
         </div>
 
-        <div className="relative flex w-full max-w-[520px] flex-col overflow-hidden h-[480px] [mask-image:linear-gradient(to_bottom,black_65%,transparent_100%)] justify-self-end">
+        <div className="relative flex w-full max-w-[540px] flex-col overflow-hidden h-[520px] sm:h-[620px] [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)] justify-self-end">
           <AnimatedList delay={1400} className="w-full gap-4">
             {workloadItems.map((item) => (
               <WorkflowItemCard {...item} key={item.name} />
             ))}
           </AnimatedList>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white via-white/80 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/70 to-transparent" />
         </div>
       </div>
     </section>
@@ -500,244 +538,54 @@ export function HowItWorks() {
 }
 
 export function ProductStory() {
-  return (
-    <section
-      className="format-section section-space"
-      id="product"
-      data-motion-section="formats"
-      aria-labelledby="formats-title"
-    >
-      <div className="wrap format-inner">
-        <div className="format-header flex">
-          <div id="formats-title" className="text-5xl font-medium tracking-tight text-black leading-[1.1]">
-            Get found organically on <MorphingText texts={texts} /><br /> Searches
-          </div>
-
-        </div>
-
-        <div className="format-gallery">
-          {contentFormats.map((format, index) => {
-            const FormatIcon = format.icon;
-
-            return (
-              <article
-                className={`format-panel format-${index}`}
-                key={format.name}
-                tabIndex={0}
-              >
-                <div className="format-title">
-                  <div className="format-label">
-                    <span className="format-mark" aria-hidden="true">
-                      <FormatIcon size={10} />
-                    </span>
-                    <span>{format.name}</span>
-                  </div>
-                  <span className="format-arrow" aria-hidden="true">
-                    <ArrowUpRight size={16} />
-                  </span>
-                </div>
-                <div className="format-output">
-                  <strong>{format.title}</strong>
-
-                  <div className="format-ui-preview" aria-hidden="true">
-                    {index === 0 && (
-                      <div className="format-blog-preview">
-                        <div className="format-preview-bar">
-                          <span>Article brief</span>
-                          <b>Ready</b>
-                        </div>
-                        <p>Hybrid work planning guide</p>
-                        <div className="format-copy-lines">
-                          <i />
-                          <i />
-                          <i />
-                        </div>
-                        <div className="format-preview-meta">
-                          <span>8 internal links</span>
-                          <span>Intent matched</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {index === 1 && (
-                      <div className="format-ebook-preview">
-                        <div className="format-ebook-cover">
-                          <BookOpen size={20} />
-                          <span>The practical guide</span>
-                          <b>Content that compounds</b>
-                        </div>
-                        <div className="format-chapter-list">
-                          <span><i>01</i>Opportunity</span>
-                          <span><i>02</i>Strategy</span>
-                          <span><i>03</i>Distribution</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {index === 2 && (
-                      <div className="format-report-preview">
-                        <div className="format-preview-bar">
-                          <span>Research summary</span>
-                          <b>Verified</b>
-                        </div>
-                        <div className="format-report-body">
-                          <div className="format-chart-bars">
-                            <i />
-                            <i />
-                            <i />
-                            <i />
-                            <i />
-                          </div>
-                          <div className="format-findings">
-                            <span>Key finding</span>
-                            <b>Demand is shifting toward specific, expert-led answers.</b>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {index === 3 && (
-                      <div className="format-linkedin-preview">
-                        <div className="format-social-head">
-                          <span>R</span>
-                          <div>
-                            <b>Project RankUp</b>
-                            <i>Founder insight</i>
-                          </div>
-                          <Link2 size={17} />
-                        </div>
-                        <div className="format-copy-lines">
-                          <i />
-                          <i />
-                          <i />
-                        </div>
-                        <div className="format-carousel-beats">
-                          <span>01</span>
-                          <span>02</span>
-                          <span>03</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
+  return <FormatSpread />;
 }
 
 export function MeasureImprove() {
   return (
     <section
-      className="connections-section section-space"
+      className="connections-section section-space relative overflow-hidden"
       id="improve"
       aria-labelledby="connections-title"
     >
-      <div className="wrap connections-inner">
-        <div className="connections-copy">
-          <h2 id="connections-title">
-            Connect in just one click.
-          </h2>
-          <p>
-            Connect the platforms you already use, and RankUp will handle
-            publishing your content for you.
-          </p>
-        </div>
-
-        <div className="platform-grid" aria-label="Publishing platforms">
-          {publishingPlatforms.map((platform) => {
-            const Icon = platform.icon;
-            return (
-              <article
-                className={`platform-card ${platform.className}`}
-                key={platform.name}
-              >
-                <span className="platform-icon" aria-hidden="true">
-                  <Icon />
-                </span>
-                <strong>{platform.name}</strong>
-              </article>
-            );
-          })}
-        </div>
+      <StripedPattern
+        direction="left"
+        width={15}
+        height={15}
+        strokeWidth={1}
+        className="text-neutral-900/40 opacity-20 pointer-events-none z-0"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%)",
+        }}
+      />
+      <StripedPattern
+        direction="right"
+        width={15}
+        height={15}
+        strokeWidth={1}
+        className="text-neutral-900/40 opacity-20 pointer-events-none z-0"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%)",
+        }}
+      />
+      <div className="wrap relative z-10">
+        <ConnectionsBeam />
       </div>
     </section>
   );
 }
 
 export function AgentMode() {
-  return (
-    <section
-      className="compound-section section-space"
-      id="agent-mode"
-      data-motion-section="compound"
-      aria-labelledby="compound-title"
-    >
-      <div className="wrap compound-inner">
-        <div className="compound-copy">
-          <span>EVERY RESULT MAKES THE NEXT MOVE CLEARER</span>
-          <h2 id="compound-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
-            The loop compounds
-            <br />
-            as the system learns.
-          </h2>
-          <p>
-            Discoveries, content, and performance signals feed the next
-            opportunity instead of disappearing into separate tools.
-          </p>
-          <small>
-            Agent Mode — Coming Soon will increasingly automate the
-            organic-growth workflow.
-          </small>
-        </div>
-
-        <div
-          className="compound-orbit"
-          role="img"
-          aria-label="Compounding feedback loop across discovery, creation, measurement, and improvement"
-        >
-          <div className="orbit-ring orbit-one" />
-          <div className="orbit-ring orbit-two" />
-          <div className="orbit-center">
-            <Image src={assets.rankupMark} alt="" width={42} height={42} />
-          </div>
-
-          <div className="orbit-track">
-            {[
-              ["Discover", Search],
-              ["Create", FileText],
-              ["Measure", BarChart3],
-              ["Improve", RefreshCw],
-            ].map(([label, Icon], index) => {
-              const OrbitIcon = Icon as typeof Search;
-              return (
-                <div
-                  className={`orbit-item orbit-item-${index}`}
-                  key={label as string}
-                >
-                  <span className="orbit-object">
-                    <OrbitIcon size={15} />
-                    {label as string}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-
-          <span className="orbit-feedback">next opportunity</span>
-        </div>
-      </div>
-    </section>
-  );
+  return <CompoundLoop />;
 }
 
 export function Proof() {
-  const taggd = testimonials[0];
-  const jaipur = testimonials[1];
   return (
     <section
       className="proof-editorial-section section-space"
@@ -749,35 +597,43 @@ export function Proof() {
         <h2 id="proof-title" className="!text-6xl font-medium tracking-tight text-black leading-[1.1]">
           Proof from teams already doing the work.
         </h2>
-        <div className="testimonial-transition">
-          <figure className="testimonial-pane testimonial-taggd">
-            <div className="testimonial-logo">
-              <Image
-                src={assets.taggdLogo}
-                alt="Taggd"
-                width={263}
-                height={79}
-              />
-            </div>
-            <blockquote>&ldquo;{taggd.quote}&rdquo;</blockquote>
-            <figcaption>
-              {taggd.domain} / {taggd.category}
-            </figcaption>
-          </figure>
-          <figure className="testimonial-pane testimonial-jaipur">
-            <div className="testimonial-logo">
-              <Image
-                src={assets.jaipurMark}
-                alt="JaipurStuffs"
-                width={394}
-                height={392}
-              />
-            </div>
-            <blockquote>&ldquo;{jaipur.quote}&rdquo;</blockquote>
-            <figcaption>
-              {jaipur.domain} / {jaipur.category}
-            </figcaption>
-          </figure>
+
+        <div className="proof-gallery">
+          {testimonials.map((testimonial, index) => (
+            <figure
+              className={`proof-panel proof-${index}`}
+              key={testimonial.name}
+              tabIndex={0}
+            >
+              <div className="proof-panel-head">
+                <span
+                  className={`proof-logo${testimonial.logoPlate ? " proof-logo-plate" : ""}`}
+                >
+                  <Image
+                    src={testimonial.logo}
+                    alt={testimonial.name}
+                    width={testimonial.logoWidth}
+                    height={testimonial.logoHeight}
+                  />
+                </span>
+                <span className="proof-arrow" aria-hidden="true">
+                  <ArrowUpRight size={16} />
+                </span>
+              </div>
+
+              <blockquote>&ldquo;{testimonial.quote}&rdquo;</blockquote>
+
+              <div className="proof-panel-foot">
+                <span className="proof-result" aria-hidden="true">
+                  <ArrowUpRight size={13} />
+                  {testimonial.result}
+                </span>
+                <figcaption>
+                  {testimonial.domain} / {testimonial.category}
+                </figcaption>
+              </div>
+            </figure>
+          ))}
         </div>
       </div>
     </section>

@@ -15,7 +15,6 @@ import {
 import { useState, useEffect, useRef, type CSSProperties } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { assets, links } from "@/content/landing";
-import { StripedPattern } from "@/components/magicui/striped-pattern";
 import { LineShadowText } from "@/components/ui/line-shadow-text";
 import { cn } from "@/lib/utils";
 
@@ -210,16 +209,15 @@ export function Hero() {
     center: { x: "46%", y: "48%" },
     to_refresh: { x: "94%", y: "4.5%" },
     click_refresh: { x: "94%", y: "4.5%" },
-    to_visitors: { x: "24%", y: "24%" },
-    click_visitors: { x: "24%", y: "24%" },
+    to_visitors: { x: "24%", y: "49.5%" },
+    click_visitors: { x: "24%", y: "49.5%" },
     on_visitors_page: { x: "50%", y: "42%" },
     to_refresh_back: { x: "94%", y: "4.5%" },
     click_refresh_back: { x: "94%", y: "4.5%" },
   }[cursorPhase];
 
   return (
-    <div className="hero-grid hero-composition relative overflow-hidden">
-      <StripedPattern className="[mask-image:radial-gradient(ellipse_75%_55%_at_50%_15%,#000_25%,transparent_100%)] text-neutral-600/40 opacity-60 pointer-events-none -z-0" />
+    <div className="hero-grid hero-composition relative z-10 overflow-hidden">
       <div className="hero-copy relative z-10">
         <h1>
           Turn visibility into{" "}
@@ -237,11 +235,11 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hero-product-scene relative" aria-hidden="true">
+      <div className="hero-product-scene relative z-10" aria-hidden="true">
         <div className="hero-lighting" />
-        <div className="product-system-frame relative overflow-hidden">
+        <div className="product-system-frame relative z-10 overflow-hidden bg-white shadow-2xl">
           {/* Topbar */}
-          <div className="system-topbar bg-white/80 border-b border-neutral-200/80">
+          <div className="system-topbar bg-white border-b border-neutral-200/80">
             <span className="text-neutral-900 font-semibold">
               <Image src={assets.rankupMark} alt="" width={18} height={18} />
               Rankup Studio
@@ -275,7 +273,7 @@ export function Hero() {
           </div>
 
           <div className="system-body relative bg-white">
-            <aside className="system-sidebar bg-neutral-50/50 border-r border-neutral-200/70">
+            <aside className="system-sidebar bg-neutral-50 border-r border-neutral-200/70">
               {[
                 { name: "Overview", id: "dashboard" },
                 { name: "Keywords", id: "keywords" },
@@ -472,7 +470,7 @@ export function Hero() {
             </div>
 
             {/* Decision sidebar */}
-            <div className="decision-layer bg-neutral-50/50 border-l border-neutral-200/80">
+            <div className="decision-layer bg-neutral-50 border-l border-neutral-200/80">
               <div className="decision-header">
                 <span className="mini-label !text-neutral-500 font-mono text-[10px] uppercase">Momentum</span>
                 <span className="decision-score !text-indigo-700 !bg-indigo-50 !border-indigo-200 font-bold">
@@ -558,4 +556,3 @@ export function Hero() {
     </div>
   );
 }
-

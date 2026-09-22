@@ -67,6 +67,12 @@ export const testimonials = [
     domain: "Taggd.in",
     category: "HR Tech Platform",
     mark: "t",
+    logo: assets.taggdLogo,
+    logoWidth: 263,
+    logoHeight: 79,
+    // Wordmark is already white, so it sits straight on the dark brand field.
+    logoPlate: false,
+    result: "Organic traffic climbing month over month",
   },
   {
     quote:
@@ -75,6 +81,12 @@ export const testimonials = [
     domain: "JaipurStuffs.in",
     category: "E-Commerce",
     mark: "js",
+    logo: assets.jaipurMark,
+    logoWidth: 394,
+    logoHeight: 392,
+    // Orange mark would vanish into the orange field, so it gets a white plate.
+    logoPlate: true,
+    result: "More published, less manual research",
   },
 ];
 export const faqs = [
